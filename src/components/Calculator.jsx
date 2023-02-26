@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import * as math from 'mathjs';
 import './Calculator.css'
 
-const  Calculator = () =>  {
+const Calculator = () => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]);
 
@@ -9,39 +10,43 @@ const  Calculator = () =>  {
   const handleClearHistory = () => {
     setHistory([]);
   };
-  const  handleInput = (value) =>{
+  const handleInput = (value) => {
+    const lastChar = input.slice(-1);
+    if (value === "00" || (lastChar === value && "+-/*".includes(lastChar))) {
+      return;
+    }
+
     setInput(input + value);
   }
 
 
-  const  handleCalculate = () =>  {
-    // eslint-disable-next-line no-eval
-    const result = eval(input);
-    setHistory([...history,`${input}=${result}`]);
+  const handleCalculate = () => {
+    // const result = eval(input);
+    const result = math.evaluate(input);
+    setHistory([...history, `${input}=${result}`]);
     setInput('');
   }
 
-  const  handleClear = () =>  {
+  const handleClear = () => {
     setInput('');
   }
 
 
-  const  handleHistoryClick = (index)  => {
+  const handleHistoryClick = (index) => {
     const value = history[index];
     const result = value.split('=')[1];
     setInput(result.toString());
     setHistory(history.slice(0, index + 1));
   }
 
-  const  handleBackspace = () => {
+  const handleBackspace = () => {
     setInput(input.slice(0, -1));
   }
 
 
   return (
-    <div>
-      <input type="text"  defaultValue={input} />
-{/* <p type="text" > {input}</p> */}
+    <div className='Calculator'>
+      <input type="text" defaultValue={input} />
 
       <div>
         <button onClick={handleClear}>C</button>
@@ -82,9 +87,9 @@ const  Calculator = () =>  {
           <li key={index} onClick={() => handleHistoryClick(index)}>
             {value.toString()}
           </li>
-          
+
         ))}
-        <button style={{width:'15rem'}} onClick={handleClearHistory}>Clear History</button>
+        <button style={{ width: '15rem' }} onClick={handleClearHistory}>Clear History</button>
       </ul>
     </div>
   );
