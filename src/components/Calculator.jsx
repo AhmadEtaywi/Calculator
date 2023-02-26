@@ -6,7 +6,9 @@ const  Calculator = () =>  {
   const [history, setHistory] = useState([]);
 
 
-
+  const handleClearHistory = () => {
+    setHistory([]);
+  };
   const  handleInput = (value) =>{
     setInput(input + value);
   }
@@ -15,7 +17,7 @@ const  Calculator = () =>  {
   const  handleCalculate = () =>  {
     // eslint-disable-next-line no-eval
     const result = eval(input);
-    setHistory([...history, result]);
+    setHistory([...history,`${input}=${result}`]);
     setInput('');
   }
 
@@ -26,7 +28,8 @@ const  Calculator = () =>  {
 
   const  handleHistoryClick = (index)  => {
     const value = history[index];
-    setInput(value.toString());
+    const result = value.split('=')[1];
+    setInput(result.toString());
     setHistory(history.slice(0, index + 1));
   }
 
@@ -35,16 +38,16 @@ const  Calculator = () =>  {
   }
 
 
-
   return (
     <div>
-      <input type="text" value={input} />
+      <input type="text"  defaultValue={input} />
+{/* <p type="text" > {input}</p> */}
 
       <div>
         <button onClick={handleClear}>C</button>
-        <button onClick={() => handleInput('/')}>/</button>
-        <button onClick={() => handleInput('*')}>X</button>
-        <button onClick={handleBackspace}>AC</button>
+        <button onClick={() => handleInput('/')}>&divide;</button>
+        <button onClick={() => handleInput('*')}>&times;</button>
+        <button onClick={handleBackspace}>Del</button>
       </div>
 
       <div>
@@ -77,9 +80,11 @@ const  Calculator = () =>  {
       <ul>
         {history.map((value, index) => (
           <li key={index} onClick={() => handleHistoryClick(index)}>
-            {value}
+            {value.toString()}
           </li>
+          
         ))}
+        <button style={{width:'15rem'}} onClick={handleClearHistory}>Clear History</button>
       </ul>
     </div>
   );
