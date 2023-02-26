@@ -46,7 +46,7 @@ const Calculator = () => {
 
   return (
     <div className='Calculator'>
-      <input type="text" defaultValue={input} />
+      <input type="text" defaultValue={input} readOnly />
 
       <div>
         <button onClick={handleClear}>C</button>
