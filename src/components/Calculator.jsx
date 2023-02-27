@@ -46,7 +46,7 @@ const Calculator = () => {
   /*  */
   return (
     <div className='Calculator'>
-      <input type="text" Value={input} readOnly />
+      <input type="text" defaultValue={input} readOnly />
 
       <div>
         <button onClick={handleClear}>C</button>
@@ -79,7 +79,7 @@ const Calculator = () => {
       <div>
         <button onClick={() => handleInput('%')}>%</button>
         <button onClick={() => handleInput('0')}>0</button>
-        <button style={{ width: '6.8rem' }} onClick={handleCalculate}>=</button>
+        <button style={{ width: '11.8rem' }} onClick={handleCalculate}>=</button>
       </div>
 
       <ul className='ul'>
@@ -88,8 +88,8 @@ const Calculator = () => {
             {value.toString()}
           </li>
         ))}
-        <button className='clearHistory-btn' onClick={handleClearHistory}>Clear History</button>
       </ul>
+        <button className='clearHistory-btn' onClick={handleClearHistory}>Clear History</button>
     </div>
   );
 };
