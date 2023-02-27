@@ -6,7 +6,6 @@ const Calculator = () => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]);
 
-
   const handleClearHistory = () => {
     setHistory([]);
   };
@@ -24,7 +23,9 @@ const Calculator = () => {
     // const result = eval(input);
     const result = math.evaluate(input);
     setHistory([...history, `${input}=${result}`]);
-    setInput('');
+    // setInput('');
+    //setInput(result);
+    setInput(`${result}`)
   }
 
   const handleClear = () => {
