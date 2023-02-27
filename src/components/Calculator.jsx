@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as math from 'mathjs';
-import './Calculator.css'
+import './Calculator.css';
 
 const Calculator = () => {
   const [input, setInput] = useState('');
@@ -24,7 +24,7 @@ const Calculator = () => {
     setHistory([...history, `${input}=${result}`]);
     // setInput('');
     //setInput(result);
-    setInput(`${result}`)
+    setInput(`${result}`);
   }
 
   const handleClear = () => {
@@ -89,7 +89,9 @@ const Calculator = () => {
           </li>
         ))}
       </ul>
-        <button className='clearHistory-btn' onClick={handleClearHistory}>Clear History</button>
+      <button
+        className='clearHistory-btn'
+        onClick={handleClearHistory}>Clear History</button>
     </div>
   );
 };
