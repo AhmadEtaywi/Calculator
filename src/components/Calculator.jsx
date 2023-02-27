@@ -18,7 +18,6 @@ const Calculator = () => {
     setInput(input + value);
   }
 
-
   const handleCalculate = () => {
     // const result = eval(input);
     const result = math.evaluate(input);
@@ -32,7 +31,6 @@ const Calculator = () => {
     setInput('');
   }
 
-
   const handleHistoryClick = (index) => {
     const value = history[index];
     const result = value.split('=')[1];
@@ -43,11 +41,12 @@ const Calculator = () => {
   const handleBackspace = () => {
     setInput(input.slice(0, -1));
   }
+  /* last change  */
 
-
+  /*  */
   return (
     <div className='Calculator'>
-      <input type="text" defaultValue={input} readOnly />
+      <input type="text" Value={input} readOnly />
 
       <div>
         <button onClick={handleClear}>C</button>
@@ -83,18 +82,15 @@ const Calculator = () => {
         <button style={{ width: '6.8rem' }} onClick={handleCalculate}>=</button>
       </div>
 
-      <ul>
+      <ul className='ul'>
         {history.map((value, index) => (
           <li key={index} onClick={() => handleHistoryClick(index)}>
             {value.toString()}
           </li>
-
         ))}
-        <button style={{ width: '15rem' }} onClick={handleClearHistory}>Clear History</button>
+        <button className='clearHistory-btn' onClick={handleClearHistory}>Clear History</button>
       </ul>
     </div>
   );
 };
-
-
 export default Calculator
